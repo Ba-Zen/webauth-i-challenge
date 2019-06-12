@@ -37,19 +37,12 @@ router.post('/login', (req, res) => {
     })
 })
 
-router.get('/logout', (req,res) => {
-    if (req.session) {
-      req.session.destroy(err => {
-        if(err) {
-          res.send('you cain checkout but chu caint neva leave')
-        } else {
-          res.send('adios')
-        }
-      })
-    } else {
-      res.send('already logged out');
-    }
-  })
+router.delete('/', (req, res) => {
+  if (req.session) {
+    req.session.destroy();
+  }
+  res.status(200).json({ message: 'good bye' });
+});
 
 module.exports = router;
 
